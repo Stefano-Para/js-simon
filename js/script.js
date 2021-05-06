@@ -9,15 +9,53 @@ function isInArray (element, array) {
     return inArray;
 }
 
+function afterTimer() {
+    for (var i=0; i < inputArray.length; i++) {
+        // se l'utente ha indovinato un numero
+        if (isInArray(inputArray[i], guessedArray)) {
+            rightArray.push(inputArray[i]);
+            // alert("Complimenti ti sei ricordato il numero " + inputArray[i])
+            console.log("Console dei numeri azzeccati: OGNI SINGOLA AGGIUNTA " + rightArray);
+            
+        } else { // l'utente non ha azzeccato il numero
+            wrongArray.push(inputArray[i]);
+            // alert("Mi spiace, il numero " + inputArray[i] + " non era nella lista da memorizzare.")
+            console.log("Console dei numeri sbagliati OGNI SINGOLA AGGIUNTA " + wrongArray); 
+        }
+        // do {
+        //     rightArray.push(inputArray[i]);
+        //     alert("Complimenti ti sei ricordato il numero " + inputArray[i])
+        //     console.log("Console dei numeri azzeccati: OGNI SINGOLA AGGIUNTA " + rightArray);
+        // } while (isInArray(inputArray[i], guessedArray));
+
+        // do {
+        //     wrongArray.push(inputArray[i]);
+        //     alert("Mi spiace, il numero " + inputArray[i] + " non era nella lista da memorizzare.")
+        //     console.log("Console dei numeri sbagliati OGNI SINGOLA AGGIUNTA " + wrongArray);
+        // } while (!isInArray(inputArray[i], guessedArray));
+    }
+
+    console.log("Console degli input usati: " + inputArray)
+    console.log("Console dei numeri azzeccati(rightArray): " + rightArray)
+    console.log("Console dei numeri sbagliati(wrongArray): " + wrongArray)
+
+    // alert(
+    //     "Hai totalizzato: " + rightArray.length + " punti. (Hai indovinato i numeri: " + rightArray.join(' ') + ")\nHai dimenticato " + wrongArray.length + " numeri. (" + wrongArray.join(' ') + ")"
+    //     );
+    document.getElementById('testo').innerHTML = "Hai totalizzato: <strong>" + rightArray.length + "</strong> punti. <br>Ti sei ricordato i numeri: <strong>" + rightArray.join(' ') + "</strong>.<br>Hai dimenticato " + wrongArray.length + " numeri (" + wrongArray.join(' ') + ")";
+} //chiusura afterTimer
 
 // MY VARIABLES ___________________________________
 var maxNumbers = 5; // quanti numeri devono essere creati
 var guessNumber; // i 5 numeri creati random
 var guessedArray = []; // array vuoto da riempire con i 5 numeri generati
 var firstAlert;
+var rightArray = [];
+var wrongArray = [];
+var text;
+
 
 // GAME
-
 // 1) alert che fa vedere 5 numeri (array) random generato (function random.)
 while (guessedArray.length < 5)  {    
     guessNumbers = getRandomNumber(1, 100);
@@ -37,22 +75,17 @@ var inputArray = [];
 
 setTimeout (timer30, 1000); // dopo 30 secondi mi da 5 prompt di richiesta numero
 var check = true;
-function timer30() {
-
+function timer30() {    
     while (inputArray.length < 5) {
-       
         userInput = parseInt(prompt("Inserisci qui i numeri che ti ricordi.. se li ricordi!"));
-            //
+            // se il numero non è presente allora pushalo dentro l'array.
             if (!isInArray(userInput, inputArray)) {
             inputArray.push(userInput);
-            }
-            
-        
-        // console.log(inputArray);
+            } // altrimenti continua a richiedere di inserirlo          
     }
     console.log("Questo è l'inputArray dei numeri inseriti dall'utente:")
     console.log(inputArray)
-    // si attiva dopo 
+    // richiamo la funzione che si attivi dopo il timer 30
     afterTimer();
 
 } // chiusura timer30
@@ -74,30 +107,13 @@ function timer30() {
 //     }
 //     console.log("Console degli input usati " + inputArray)
 // } //chiusura timer31
-var rightArray = [];
-var wrongArray = [];
 
-function afterTimer() {
 
-    for (var i=0; i < inputArray.length; i++) {
 
-        // se l'utente ha indovinato un numero
-        if (isInArray(inputArray[i], guessedArray)) {
-            rightArray.push(inputArray[i]);
-            // alert("Complimenti ti sei ricordato il numero " + inputArray[i])
-            console.log("Console dei numeri azzeccati: " + rightArray);
-            
-        } else { // l'utente non ha azzeccato il numero
-            wrongArray.push(inputArray[i]);
-            // alert("Mi spiace, il numero " + inputArray[i] + " non era nella lista da memorizzare.")
-            console.log("Console dei numeri sbagliati " + wrongArray);
-        }
-    }
-    console.log("Console degli input usati: " + inputArray)
-    console.log("Console dei numeri azzeccati: " + rightArray)
-    console.log("Console dei numeri sbagliati: " + wrongArray)
-    
-} //chiusura timer31
+    // aggiungere 3 if: 1) se ha azzeccato tutti
+    //                  2) se li ha sbagliati tutti
+    //                  3) se ne ha azzeccati alcuni: quali.
+
 
 
     // "hai indovinato 3 numeri"
