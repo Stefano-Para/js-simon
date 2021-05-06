@@ -73,7 +73,7 @@ firstAlert = alert("Memorizza i seguenti numeri: \n" + guessedArray.join('    ')
 var userInput;
 var inputArray = [];
 
-setTimeout (timer30, 1000); // dopo 30 secondi mi da 5 prompt di richiesta numero
+setTimeout (timer30, 15000); // dopo 30 secondi mi da 5 prompt di richiesta numero
 var check = true;
 function timer30() {    
     while (inputArray.length < 5) {
